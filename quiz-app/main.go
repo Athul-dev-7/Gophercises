@@ -8,15 +8,18 @@ import (
 
 func main() {
 	csvFile, err := os.Open("./problems.csv")
-	checkNilErr(err)
+	if err != nil {
+		checkNilErr(fmt.Sprintf("Failed to open the csv file %v\n", err))
+	}
 	reader := csv.NewReader(csvFile)
 	records, err := reader.ReadAll()
-	checkNilErr(err)
+	if err != nil {
+		checkNilErr("Failed to read the csv file")
+	}
 	fmt.Println(records)
 }
 
-func checkNilErr(err error) {
-	if err != nil {
-		panic(err)
-	}
+func checkNilErr(msg string) {
+	fmt.Println(msg)
+	os.Exit(1)
 }
