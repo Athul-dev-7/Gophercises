@@ -4,6 +4,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -19,6 +20,17 @@ func main() {
 	fmt.Println(records)
 	problems := parseRecords(records)
 	fmt.Println(problems)
+
+	correct := 0
+	for i, p := range problems {
+		fmt.Printf("Problem #%d : %s = \n", i+1, p.q)
+		var answer string
+		fmt.Scanf("%s", &answer)
+		if answer == p.a {
+			correct++
+		}
+	}
+	fmt.Printf("You scored %d out of %d\n", correct, len(problems))
 }
 
 func checkNilErr(msg string) {
@@ -31,7 +43,7 @@ func parseRecords(records [][]string) []Problem {
 	for i, record := range records {
 		result[i] = Problem{
 			q: record[0],
-			a: record[1],
+			a: strings.TrimSpace(record[1]),
 		}
 	}
 	return result
