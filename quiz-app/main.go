@@ -23,3 +23,8 @@ func checkNilErr(msg string) {
 	fmt.Println(msg)
 	os.Exit(1)
 }
+
+type Problem struct {
+	q string
+	a string
+}
