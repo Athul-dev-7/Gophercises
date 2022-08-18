@@ -17,11 +17,24 @@ func main() {
 		checkNilErr("Failed to read the csv file")
 	}
 	fmt.Println(records)
+	problems := parseRecords(records)
+	fmt.Println(problems)
 }
 
 func checkNilErr(msg string) {
 	fmt.Println(msg)
 	os.Exit(1)
+}
+
+func parseRecords(records [][]string) []Problem {
+	result := make([]Problem, len(records))
+	for i, record := range records {
+		result[i] = Problem{
+			q: record[0],
+			a: record[1],
+		}
+	}
+	return result
 }
 
 type Problem struct {
