@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	// Reading csv file
 	csvFile, err := os.Open("./problems.csv")
 	if err != nil {
 		checkNilErr(fmt.Sprintf("Failed to open the csv file %v\n", err))
@@ -18,9 +19,12 @@ func main() {
 		checkNilErr("Failed to read the csv file")
 	}
 	fmt.Println(records)
+
+	// Converting 2D slice to Slice of struct's
 	problems := parseRecords(records)
 	fmt.Println(problems)
 
+	// Logic for getting user inputs & calculating correct answers
 	correct := 0
 	for i, p := range problems {
 		fmt.Printf("Problem #%d : %s = \n", i+1, p.q)
