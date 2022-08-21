@@ -27,7 +27,7 @@ func main() {
 	// Logic for getting user inputs & calculating correct answers
 	correct := 0
 	for i, p := range problems {
-		fmt.Printf("Problem #%d : %s = \n", i+1, p.q)
+		fmt.Printf("Problem #%d : %s = ", i+1, p.q)
 		var answer string
 		fmt.Scanf("%s", &answer)
 		if answer == p.a {
