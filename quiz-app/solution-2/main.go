@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -18,11 +19,12 @@ func main() {
 	if err != nil {
 		checkNilErr("Failed to read the csv file")
 	}
-	fmt.Println(records)
 
 	// Converting 2D slice to Slice of struct's
 	problems := parseRecords(records)
-	fmt.Println(problems)
+	// Setting timer for 3 seconds
+	timer := time.NewTimer(time.Second * 3)
+	<-timer.C
 
 	// Logic for getting user inputs & calculating correct answers
 	correct := 0
