@@ -22,21 +22,34 @@ func main() {
 
 	// Converting 2D slice to Slice of struct's
 	problems := parseRecords(records)
-	// Setting timer for 3 seconds
-	timer := time.NewTimer(time.Second * 3)
-	<-timer.C
+
+	// Setting timer
+	timer := time.NewTimer(time.Second * time.Duration(3))
 
 	// Logic for getting user inputs & calculating correct answers
 	correct := 0
+problemLogic:
 	for i, p := range problems {
 		fmt.Printf("Problem #%d : %s = ", i+1, p.q)
-		var answer string
-		fmt.Scanf("%s", &answer)
-		if answer == p.a {
-			correct++
+		answerCh := make(chan string)
+		go func() {
+			var answer string
+			fmt.Scanf("%s", &answer)
+			answerCh <- answer
+		}()
+		select {
+		case <-timer.C:
+			fmt.Println("")
+			break problemLogic
+		case answer := <-answerCh:
+			if answer == p.a {
+				correct++
+			}
 		}
+
 	}
 	fmt.Printf("You scored %d out of %d\n", correct, len(problems))
+
 }
 
 func checkNilErr(msg string) {
