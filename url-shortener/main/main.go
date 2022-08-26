@@ -1,6 +1,16 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+var pathsToUrls = map[string]string{
+	"/chaimettoast": "https://www.youtube.com/watch?v=LMEdbBK4bk0",
+	"/das":          "https://github.com/athul-dev-7",
+}
 
 func main() {
 	r := gin.Default()
