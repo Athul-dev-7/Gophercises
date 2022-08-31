@@ -19,12 +19,11 @@ func main() {
 		panic(err)
 	}
 
-	d := json.NewDecoder(file)
-	var story CYOA.Story
-	if err := d.Decode(&story); err != nil {
+	story, err := CYOA.JSONStory(file)
+	if err != nil {
 		panic(err)
 	}
-	// fmt.Printf("%+v\n", story)
+	fmt.Printf("%+v\n", story)
 	// PrettyPrint(story)
 }
 
