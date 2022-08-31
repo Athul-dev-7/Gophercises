@@ -24,5 +24,14 @@ func main() {
 	if err := d.Decode(&story); err != nil {
 		panic(err)
 	}
-	fmt.Printf("%+v\n", story)
+	// fmt.Printf("%+v\n", story)
+	// PrettyPrint(story)
+}
+
+func PrettyPrint(v interface{}) (err error) {
+	result, err := json.MarshalIndent(v, "", " ")
+	if err == nil {
+		fmt.Println(string(result))
+	}
+	return
 }
